@@ -1,0 +1,12 @@
+{
+    // Keep IntelliSense active on your code, but quiet inside Boost/MSYS2 headers.
+    "C_Cpp.errorSquiggles": "enabled",
+    "C_Cpp.codeAnalysis.exclude": {
+        "C:/msys64/**": true
+    },
+    "C_Cpp.codeAnalysis.clangTidy.headerFilter": "^(?!.*[\\/](msys64|boost)[\\/]).*$",
+    "files.associations": {
+        "*.hpp": "cpp",
+        "*.ipp": "cpp"
+    }
+}
