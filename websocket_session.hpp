@@ -23,7 +23,7 @@ class websocket_session : public std::enable_shared_from_this<websocket_session>
     public:
 
     ~websocket_session();
-    websokcet_session(std::shared_ptr<shared_state> const& state, tcp::socket socket);
+    websocket_session(std::shared_ptr<shared_state> const& state, tcp::socket socket);
 
     template <class Body, class Allocator>
     void run(http::request<Body, http::basic_fields<Allocator>> req);

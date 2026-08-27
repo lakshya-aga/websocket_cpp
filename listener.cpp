@@ -1,12 +1,14 @@
-#include <bits/stdc++.h>
-
-// using namespace std;
 #include <boost/beast/core.hpp>
 #include <boost/beast/http.hpp>
 #include <boost/beast/version.hpp>
 #include <boost/asio.hpp>
 
-#include 'websocket_session.hpp'
+namespace beast = boost::beast;
+namespace websocket = boost::beast::websocket;
+namespace http = boost::beast::http;
+
+namespace net = boost::asio;
+using tcp = net::ip::tcp;
 
 
 listener::run(){
