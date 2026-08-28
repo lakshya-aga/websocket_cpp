@@ -1,16 +1,5 @@
 #pragma once
-#include <boost/beast/core.hpp>
-#include <boost/beast/http.hpp>
-#include <boost/beast/version.hpp>
-#include <boost/asio.hpp>
-#include <unordered_set>
-namespace beast = boost::beast;
-namespace websocket = boost::beast::websocket;
-namespace http = boost::beast::http;
-
-namespace net = boost::asio;
-using tcp = net::ip::tcp;
-
+#include "net.hpp"
 #include "websocket_session.hpp"
 
 class listener: public std::enable_shared_from_this<listener>
@@ -29,11 +18,11 @@ class listener: public std::enable_shared_from_this<listener>
     : acceptor_(ioc)          // executor supplied here
     , socket_(ioc)
     , state_(std::move(state))
-    {
-        error_code ec;
-        acceptor_.open(ep.protocol(), ec);                                if(ec) return fail(ec, "open");
-        acceptor_.set_option(net::socket_base::reuse_address(true), ec);  if(ec) return fail(ec, "set_option");
-        acceptor_.bind(ep, ec);                                           if(ec) return fail(ec, "bind");
-        acceptor_.listen(net::socket_base::max_listen_connections, ec);   if(ec) return fail(ec, "listen");
-    }   
+{
+    error_code ec;
+    acceptor_.open(ep.protocol(), ec);                                if(ec) { fail(ec, "open"); return;}
+    acceptor_.set_option(net::socket_base::reuse_address(true), ec);  if(ec) { fail(ec, "set_option"); return;}
+    acceptor_.bind(ep, ec);                                           if(ec) { fail(ec, "bind"); return;}
+    acceptor_.listen(net::socket_base::max_listen_connections, ec);   if(ec) { fail(ec, "listen"); return;}
+}
 };

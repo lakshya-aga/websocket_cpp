@@ -1,14 +1,6 @@
-#include <boost/beast/core.hpp>
-#include <boost/beast/http.hpp>
-#include <boost/beast/version.hpp>
-#include <boost/asio.hpp>
+#pragma once
+#include "net.hpp"
 
-namespace beast = boost::beast;
-namespace websocket = boost::beast::websocket;
-namespace http = boost::beast::http;
-
-namespace net = boost::asio;
-using tcp = net::ip::tcp;
 #include "listener.hpp"
 #include "http_session.hpp"
 

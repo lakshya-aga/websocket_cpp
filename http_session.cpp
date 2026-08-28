@@ -1,15 +1,5 @@
 #pragma once
-#include <boost/beast/core.hpp>
-#include <boost/beast/http.hpp>
-#include <boost/beast/version.hpp>
-#include <boost/asio.hpp>
-
-namespace beast = boost::beast;
-namespace websocket = boost::beast::websocket;
-namespace http = boost::beast::http;
-
-namespace net = boost::asio;
-using tcp = net::ip::tcp;
+#include "net.hpp"
 
 #include "shared_state.hpp"
 #include "websocket_session.hpp"
