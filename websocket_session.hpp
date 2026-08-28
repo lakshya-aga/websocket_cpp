@@ -1,7 +1,9 @@
+#pragma once
 #include <boost/beast/core.hpp>
 #include <boost/beast/http.hpp>
 #include <boost/beast/version.hpp>
 #include <boost/asio.hpp>
+#include <boost/beast/websocket.hpp>
 
 namespace beast = boost::beast;
 namespace websocket = boost::beast::websocket;
@@ -9,11 +11,12 @@ namespace http = boost::beast::http;
 
 namespace net = boost::asio;
 using tcp = net::ip::tcp;
+using error_code = boost::system::error_code;
 
 class websocket_session : public std::enable_shared_from_this<websocket_session>{
     beast::flat_buffer buffer_;
     websocket::stream<tcp::socket> ws_;
-    std::shared_ptr<shared_state> shared_state_;
+    std::shared_ptr<shared_state> state_;
     std::vector<std::shared_ptr<std::string const>> queue_;
     void fail(error_code ec, char const* ch);
     void on_accept(error_code ec);

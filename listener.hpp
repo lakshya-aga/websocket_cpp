@@ -1,14 +1,19 @@
-#include <bits/stdc++.h>
-
-// using namespace std;
+#pragma once
 #include <boost/beast/core.hpp>
 #include <boost/beast/http.hpp>
 #include <boost/beast/version.hpp>
 #include <boost/asio.hpp>
+#include <unordered_set>
+namespace beast = boost::beast;
+namespace websocket = boost::beast::websocket;
+namespace http = boost::beast::http;
+
+namespace net = boost::asio;
+using tcp = net::ip::tcp;
 
 #include "websocket_session.hpp"
 
-class listener: public make_shared_from_this<listener>
+class listener: public std::enable_shared_from_this<listener>
 {
     tcp::acceptor acceptor_;
     tcp::socket socket_;
