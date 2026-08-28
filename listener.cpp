@@ -9,29 +9,31 @@ namespace http = boost::beast::http;
 
 namespace net = boost::asio;
 using tcp = net::ip::tcp;
+#include "listener.hpp"
+#include "http_session.hpp"
 
-
-listener::run(){
+void listener::run(){
     acceptor_.async_accept(
         socket_,
-        [self](error_code ec){
+        [self = shared_from_this()](error_code ec){
             self->on_accept(ec);
-        })
+        });
 }
 
-void listener::on_accpet(error_code ec){
+void listener::on_accept(error_code ec){
     if(ec)
     fail(ec, "accept");
     else
     std::make_shared<http_session>(std::move(socket_),
-    state)->run();
+    state_)->run();
 
     acceptor_.async_accept(socket_,
-    [self](error_code ec){
+    [self = shared_from_this()](error_code ec){
         self->on_accept(ec);
-    })
+    });
 }
 
 void listener::fail(error_code ec, char const* what){
 
 }
+

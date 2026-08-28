@@ -18,10 +18,8 @@ using tcp = net::ip::tcp;
 http_session::http_session(
  tcp::socket socket,
  std::shared_ptr<shared_state> const& state)
- : socket_(std::move(socket))
- , state_(state)
-{
-}
+ : socket_(std::move(socket)), state_(state)
+{}
 
 void http_session::run()
 {

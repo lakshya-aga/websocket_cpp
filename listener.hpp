@@ -17,7 +17,7 @@ class listener: public std::enable_shared_from_this<listener>
 {
     tcp::acceptor acceptor_;
     tcp::socket socket_;
-    std::shared_ptr<shared_state> shared_state_;
+    std::shared_ptr<shared_state> state_;
 
 
     void fail(error_code ec, char const* what);
@@ -25,8 +25,15 @@ class listener: public std::enable_shared_from_this<listener>
 
     public:
     void run();
-    listener(tcp::acceptor acceptor_, 
-    tcp::socket socket_,
-    std::shared_ptr<shared_state> shared_state
-    );
+    listener::listener(net::io_context& ioc, tcp::endpoint ep, std::shared_ptr<shared_state> state)
+    : acceptor_(ioc)          // executor supplied here
+    , socket_(ioc)
+    , state_(std::move(state))
+    {
+        error_code ec;
+        acceptor_.open(ep.protocol(), ec);                                if(ec) return fail(ec, "open");
+        acceptor_.set_option(net::socket_base::reuse_address(true), ec);  if(ec) return fail(ec, "set_option");
+        acceptor_.bind(ep, ec);                                           if(ec) return fail(ec, "bind");
+        acceptor_.listen(net::socket_base::max_listen_connections, ec);   if(ec) return fail(ec, "listen");
+    }   
 };
