@@ -1,11 +1,4 @@
 #include <bits/stdc++.h>
-namespace net = boost::asio;
-using tcp = net::ip::tcp;
-using error_code = boost::system::error_code;
-// Beast
-namespace beast = boost::beast;
-namespace http = boost::beast::http;
-namespace websocket = boost::beast::websocket;
 #include <bits/stdc++.h>
 
 // using namespace std;
@@ -14,12 +7,19 @@ namespace websocket = boost::beast::websocket;
 #include <boost/beast/version.hpp>
 #include <boost/asio.hpp>
 
+
+
+namespace net = boost::asio;
+using tcp = net::ip::tcp;
+using error_code = boost::system::error_code;
+// Beast
+namespace beast = boost::beast;
+namespace http = boost::beast::http;
+namespace websocket = boost::beast::websocket;
 #include "websocket_session.hpp"
 #include "listener.hpp"
 #include "shared_state.hpp"
 #include "http_session.hpp"
-
-
 
 int main(int argc, char** argv) {
     auto address = argv[1];

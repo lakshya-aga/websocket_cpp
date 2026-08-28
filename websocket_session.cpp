@@ -15,9 +15,11 @@ namespace http = boost::beast::http;
 
 
 
-websocket_session::websocket_session(std::shared_ptr<shared_state> const& state,
+websocket_session::
+websocket_session(std::shared_ptr<shared_state> const& state,
                                      tcp::socket socket):
-                                     state_(state), ws_(socket){}
+                                     state_(state), 
+                                     ws_(std::move(socket)){}
 
 
 template <class Body, class Allocator>
@@ -84,21 +86,6 @@ void websocket_session::on_write(error_code ec, size_t sz){
             }
         );
     }
-}
-
-void websocket_session::on_write(error_code ec, std::size_t){
-    if(ec){
-        return fail(ec, "write");
-    }
-    queue_.erase(queue_.begin());
-    if(!queue_.empty())
-    ws_.async_write(
-        net::buffer(*queue_.front()),
-        [sp = shared_from_this()](
-        error_code ec, std::size_t bytes)
-            {
-            sp->on_write(ec, bytes);
-            });
 }
 
 void websocket_session::fail(error_code ec, char const* what){

@@ -11,6 +11,8 @@ namespace http = boost::beast::http;
 namespace net = boost::asio;
 using tcp = net::ip::tcp;
 
+class websocket_session;
+class shared_state;
 #include "websocket_session.hpp"
 class shared_state{
     std::string doc_root_;
