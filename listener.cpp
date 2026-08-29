@@ -1,4 +1,3 @@
-#pragma once
 #include "net.hpp"
 
 #include "listener.hpp"

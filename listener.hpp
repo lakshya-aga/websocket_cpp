@@ -14,15 +14,15 @@ class listener: public std::enable_shared_from_this<listener>
 
     public:
     void run();
-    listener::listener(net::io_context& ioc, tcp::endpoint ep, std::shared_ptr<shared_state> state)
+    listener(net::io_context& ioc, tcp::endpoint ep, std::shared_ptr<shared_state> state)
     : acceptor_(ioc)          // executor supplied here
     , socket_(ioc)
     , state_(std::move(state))
 {
     error_code ec;
-    acceptor_.open(ep.protocol(), ec);                                if(ec) { fail(ec, "open"); return;}
-    acceptor_.set_option(net::socket_base::reuse_address(true), ec);  if(ec) { fail(ec, "set_option"); return;}
-    acceptor_.bind(ep, ec);                                           if(ec) { fail(ec, "bind"); return;}
-    acceptor_.listen(net::socket_base::max_listen_connections, ec);   if(ec) { fail(ec, "listen"); return;}
+    acceptor_.open(ep.protocol(), ec);                                
+    acceptor_.set_option(net::socket_base::reuse_address(true), ec);  
+    acceptor_.bind(ep);                                           
+    acceptor_.listen(net::socket_base::max_listen_connections, ec);   
 }
 };

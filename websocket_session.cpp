@@ -1,4 +1,3 @@
-#pragma once
 #include "net.hpp"
 
 #include "shared_state.hpp"
@@ -12,14 +11,6 @@ websocket_session(std::shared_ptr<shared_state> const& state,
                                      ws_(std::move(socket)){}
 
 
-template <class Body, class Allocator>
-void websocket_session::run(http::request<Body, http::basic_fields<Allocator>> req){
-    ws_.async_accept(req,
-    [self = shared_from_this()](error_code ec){
-        self->on_accept(ec);
-    }
-);
-}
 
 void websocket_session::on_accept(error_code ec){
     if(ec)

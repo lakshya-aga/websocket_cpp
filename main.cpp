@@ -1,14 +1,12 @@
-#pragma once
 #include "net.hpp"
 #include "websocket_session.hpp"
 #include "listener.hpp"
 #include "shared_state.hpp"
 #include "http_session.hpp"
-#include <bits/stdc++.h>
 int main(int argc, char** argv) {
-    auto address = argv[1];
-    auto port = argv[2];
-    auto doc_root = std::atoi(argv[3]);
+    auto address = net::ip::make_address(argv[1]);
+    auto port = (unsigned short)std::atoi(argv[2]);
+    auto doc_root = std::string(argv[3]);
     net::io_context ioc;
 
     std::make_shared<listener>(

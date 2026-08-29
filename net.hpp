@@ -4,7 +4,13 @@
 #include <boost/beast/version.hpp>
 #include <boost/asio.hpp>
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+#include <unordered_set>
+#include <utility>
+#include <cstdlib>
 
 namespace beast     = boost::beast;
 namespace http      = boost::beast::http;
