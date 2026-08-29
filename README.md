@@ -31,3 +31,8 @@ clang++ -std=c++17 -I/opt/homebrew/include \
     main.cpp http_session.cpp listener.cpp shared_state.cpp websocket_session.cpp \
     -o chat_server
 ```
+
+to run:
+```
+chat_server 0.0.0.0 8080 /app/www
+```
