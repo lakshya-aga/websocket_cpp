@@ -24,3 +24,10 @@ We additionally add an html page for the user interface.
 ## Demo
 
 In progress: lakshya-aga.github.io/cpp_chat
+
+mac:
+```
+clang++ -std=c++17 -I/opt/homebrew/include \
+    main.cpp http_session.cpp listener.cpp shared_state.cpp websocket_session.cpp \
+    -o chat_server
+```

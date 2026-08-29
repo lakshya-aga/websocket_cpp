@@ -1,0 +1,18 @@
+.git
+.gitignore
+.vscode
+.DS_Store
+
+# Locally built binary and objects -- the image builds its own.
+chat_server
+*.o
+*.dSYM
+
+# Dead, fully commented-out scratch files.
+chat.cpp
+chat_server.cpp
+chat_server.hpp
+
+README.md
+Dockerfile
+.dockerignore

@@ -16,7 +16,7 @@ void shared_state::leave(websocket_session& session){
 }
 
 void shared_state::send(std::string message){
-    auto ss = make_shared<std::string>(std::move(message));
+    auto ss = std::make_shared<std::string>(std::move(message));
     for(auto session: shared_state::sessions_)
     session->send(ss);
 }
