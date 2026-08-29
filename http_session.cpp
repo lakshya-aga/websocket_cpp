@@ -69,10 +69,6 @@ path_cat(
     return result;
 }
 
-// This function produces an HTTP response for the given
-// request. The type of the response object depends on the
-// contents of the request, so the interface requires the
-// caller to pass a generic lambda for receiving the response.
 template<
     class Body, class Allocator,
     class Send>
@@ -239,3 +235,7 @@ void http_session::on_write(error_code ec, std::size_t, bool close)
         self->on_read(ec, bytes);
     });
 }
+
+    void http_session::fail(error_code ec, char const* what){
+
+    }
